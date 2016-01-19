@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		970164511C4E0B97001419FE /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9701644F1C4E0B97001419FE /* MainViewController.m */; };
 		970164521C4E0B97001419FE /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970164501C4E0B97001419FE /* MainViewController.xib */; };
+		9701645B1C4E11CC001419FE /* SnakeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9701645A1C4E11CC001419FE /* SnakeModel.m */; };
+		970164651C4E42A1001419FE /* SnakeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 970164641C4E42A1001419FE /* SnakeView.m */; };
 		978B89EF1C4E09F300CDA126 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 978B89EE1C4E09F300CDA126 /* main.m */; };
 		978B89F21C4E09F300CDA126 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 978B89F11C4E09F300CDA126 /* AppDelegate.m */; };
 		978B89FA1C4E09F300CDA126 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 978B89F91C4E09F300CDA126 /* Assets.xcassets */; };
@@ -19,6 +21,10 @@
 		9701644E1C4E0B97001419FE /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		9701644F1C4E0B97001419FE /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		970164501C4E0B97001419FE /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		970164591C4E11CC001419FE /* SnakeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnakeModel.h; sourceTree = "<group>"; };
+		9701645A1C4E11CC001419FE /* SnakeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnakeModel.m; sourceTree = "<group>"; };
+		970164631C4E42A1001419FE /* SnakeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnakeView.h; sourceTree = "<group>"; };
+		970164641C4E42A1001419FE /* SnakeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnakeView.m; sourceTree = "<group>"; };
 		978B89EA1C4E09F200CDA126 /* ShiuBulimiaSnake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShiuBulimiaSnake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		978B89EE1C4E09F300CDA126 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		978B89F01C4E09F300CDA126 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -49,6 +55,40 @@
 			path = MainViewController;
 			sourceTree = "<group>";
 		};
+		970164571C4E11CC001419FE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				970164581C4E11CC001419FE /* SnakeModel */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		970164581C4E11CC001419FE /* SnakeModel */ = {
+			isa = PBXGroup;
+			children = (
+				970164591C4E11CC001419FE /* SnakeModel.h */,
+				9701645A1C4E11CC001419FE /* SnakeModel.m */,
+			);
+			path = SnakeModel;
+			sourceTree = "<group>";
+		};
+		970164611C4E42A1001419FE /* Commom */ = {
+			isa = PBXGroup;
+			children = (
+				970164621C4E42A1001419FE /* Views */,
+			);
+			path = Commom;
+			sourceTree = "<group>";
+		};
+		970164621C4E42A1001419FE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				970164631C4E42A1001419FE /* SnakeView.h */,
+				970164641C4E42A1001419FE /* SnakeView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		978B89E11C4E09F200CDA126 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +108,8 @@
 		978B89EC1C4E09F200CDA126 /* ShiuBulimiaSnake */ = {
 			isa = PBXGroup;
 			children = (
+				970164611C4E42A1001419FE /* Commom */,
+				970164571C4E11CC001419FE /* Model */,
 				978B89F01C4E09F300CDA126 /* AppDelegate.h */,
 				978B89F11C4E09F300CDA126 /* AppDelegate.m */,
 				9701644D1C4E0B97001419FE /* MainViewController */,
@@ -160,7 +202,9 @@
 			files = (
 				978B89F21C4E09F300CDA126 /* AppDelegate.m in Sources */,
 				970164511C4E0B97001419FE /* MainViewController.m in Sources */,
+				9701645B1C4E11CC001419FE /* SnakeModel.m in Sources */,
 				978B89EF1C4E09F300CDA126 /* main.m in Sources */,
+				970164651C4E42A1001419FE /* SnakeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
