@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  ShiuBulimiaSnake
 //
 //  Created by 許佳豪 on 2016/1/19.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MainViewController : UIViewController
 
 @end
-
