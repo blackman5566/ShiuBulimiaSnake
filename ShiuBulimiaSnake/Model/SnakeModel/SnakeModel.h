@@ -20,29 +20,54 @@ typedef enum {
 @property (nonatomic, assign) SnakeDirectionStatus snakeDirectionStatus;
 @property (nonatomic, assign) NSInteger mainScreenHeight;
 @property (nonatomic, assign) NSInteger mainScreenWidth;
-
-+ (SnakeModel *)shared;
+/*
+ @abstract 貪食蛇目前的身體每個座標點的 array，座標點是我們自己定義的。
+ */
 + (NSMutableArray *)snakeBodyArrays;
+
+/*
+ @abstract 儲存水果的座標
+ */
 + (NSMutableArray *)hitBodyArrays;
+
+/*
+ @abstract 要求貪食蛇增加長度
+ */
 + (void)requireIncreasingSnakelength;
+
+/*
+ @abstract 重新開始遊戲
+ */
 + (void)resetGame:(CGSize)mainScreenSize;
+
+/*
+ @abstract 要求貪食蛇移動
+ */
 + (void)requireSnakeMove;
-+ (CGPoint)getXY:(NSInteger)index;
+
+/*
+ @abstract 詢問貪食蛇現在頭是否碰到自己的身體
+ */
 + (bool)isSnakeHitOwnbody;
+
+/*
+ @abstract 詢問貪食蛇的頭是否剛好碰到某個點
+ */
 + (bool)isSnakeHitPoint;
+
+/*
+ @abstract 改變貪食蛇現在行徑的方向
+ */
 + (void)isSnakeDirectionStatus:(SnakeDirectionStatus)SnakeDirectionStatus;
+
+/*
+ @abstract 產生新水果點
+ */
 + (void)creatNewHitPoint;
 
 /*
-   - 蛇的 Model
-   - property 包括：
-   - 蛇目前的身體每個座標點的 array，座標點是我們自己定義的
-   Class，只有兩個屬性：x 與 y，都是 NSInteger
-   - 蛇目前的行進方向
-   - method 包括：
-   - 要求蛇移動一格
-   - 要求蛇增加長度
-   - 詢問蛇現在頭是否碰到自己的身體
-   - 詢問蛇的頭是否剛好碰到某個點
+ @abstract 回傳貪食蛇目前的身體座標點
  */
++ (CGPoint)getXY:(NSInteger)index;
+
 @end
