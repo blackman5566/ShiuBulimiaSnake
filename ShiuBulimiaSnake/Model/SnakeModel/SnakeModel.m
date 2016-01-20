@@ -9,8 +9,6 @@
 
 #import "SnakeModel.h"
 
-#define pointDistance 20
-
 @interface SnakeModel ()
 
 @property (nonatomic, assign) BOOL isEatingFruit;
@@ -69,8 +67,8 @@
     [[SnakeModel shared] snakeDirectionStatus:SnakeDirectionStatus];
 }
 
-+ (CGPoint)getXY:(NSInteger)index {
-    return [[SnakeModel shared] getXY:index];
++ (CGPoint)getPoint:(NSArray *)array index:(NSInteger)index {
+    return [[SnakeModel shared] getPoint:array index:index];
 }
 
 + (void)creatNewHitPoint {
@@ -90,26 +88,20 @@
 }
 
 - (bool)isSnakeHitPoint {
-    NSString *snakeHead = [SnakeModel snakeBodyArrays][0];
-    NSArray *headXY = [snakeHead componentsSeparatedByString:@","];
-    int x = [headXY[0] intValue];
-    int y = [headXY[1] intValue];
+    CGPoint snakeHeadPoint = [self getPoint:[SnakeModel snakeBodyArrays] index:0];
     NSMutableArray *snakeRangeArrays = [NSMutableArray new];
-    for (int i = 1; i < 15; i++) {
-        for (int j = 1; j < 15; j++) {
-            NSString *string = [NSString stringWithFormat:@"%d,%d", x + i, y + j];
+    for (int i = 1; i < 10; i++) {
+        for (int j = 1; j < 10; j++) {
+            NSString *string = [NSString stringWithFormat:@"%d,%d", (int)snakeHeadPoint.x + i, (int)snakeHeadPoint.y + j];
             [snakeRangeArrays addObject:string];
         }
     }
 
+    CGPoint hitPoint = [self getPoint:[SnakeModel hitBodyArrays] index:0];
     NSMutableArray *hitRangeArrays = [NSMutableArray new];
-    NSString *hitPoint = [SnakeModel hitBodyArrays][0];
-    NSArray *hitXY = [hitPoint componentsSeparatedByString:@","];
-    int hitX = [hitXY[0] intValue];
-    int hitY = [hitXY[1] intValue];
-    for (int i = 1; i < 20; i++) {
-        for (int j = 1; j < 20; j++) {
-            NSString *string = [NSString stringWithFormat:@"%d,%d", hitX + i, hitY + j];
+    for (int i = 1; i < 15; i++) {
+        for (int j = 1; j < 15; j++) {
+            NSString *string = [NSString stringWithFormat:@"%d,%d", (int)hitPoint.x + i, (int)hitPoint.y + j];
             [hitRangeArrays addObject:string];
         }
     }
@@ -129,7 +121,7 @@
 }
 
 - (void)SnakeMoveDown {
-    CGPoint point = [self getXY:0];
+    CGPoint point =  [self getPoint:[SnakeModel snakeBodyArrays] index:0];
     point.y += pointDistance;
     if (point.y > self.mainScreenHeight) {
         point.y = 0;
@@ -140,7 +132,7 @@
 }
 
 - (void)SnakeMoveUp {
-    CGPoint point = [self getXY:0];
+    CGPoint point =  [self getPoint:[SnakeModel snakeBodyArrays] index:0];
     point.y -= pointDistance;
     if (point.y < 0) {
         point.y = self.mainScreenHeight;
@@ -151,7 +143,7 @@
 }
 
 - (void)SnakeMoveLeft {
-    CGPoint point =  [self getXY:0];
+    CGPoint point =  [self getPoint:[SnakeModel snakeBodyArrays] index:0];
     point.x -= pointDistance;
     if (point.x < 0) {
         point.x = self.mainScreenWidth;
@@ -162,7 +154,7 @@
 }
 
 - (void)SnakeMoveRight {
-    CGPoint point =  [self getXY:0];
+    CGPoint point =  [self getPoint:[SnakeModel snakeBodyArrays] index:0];
     point.x += pointDistance;
     if (point.x > self.mainScreenWidth) {
         point.x = 0;
@@ -212,8 +204,8 @@
     self.mainScreenWidth = mainScreenSize.width;
 }
 
-- (CGPoint)getXY:(NSInteger)index {
-    NSString *snakeHead = [SnakeModel snakeBodyArrays][index];
+- (CGPoint)getPoint:(NSArray *)array index:(NSInteger)index {
+    NSString *snakeHead = array[index];
     NSArray *headXY = [snakeHead componentsSeparatedByString:@","];
     int x = [headXY[0] intValue];
     int y = [headXY[1] intValue];

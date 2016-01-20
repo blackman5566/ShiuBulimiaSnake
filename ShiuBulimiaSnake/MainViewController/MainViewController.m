@@ -45,10 +45,10 @@
     [self.mainView addSubview:self.snakeView];
 }
 
-- (void)initAlertAction {
+- (void)initAlertAction:(NSString *)message {
     UIAlertController *alert = [UIAlertController
                                 alertControllerWithTitle:@"遊戲"
-                                                 message:@"開始"
+                                                 message:message
                                           preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction *yesButton = [UIAlertAction
@@ -84,7 +84,7 @@
     if ([SnakeModel isSnakeHitOwnbody]) {
         [self.mainView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [self.timer invalidate];
-        [self initAlertAction];
+        [self initAlertAction:@"重新開始"];
     }
 }
 #pragma  mark - life cycle
@@ -94,7 +94,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self initAlertAction];
+    [self initAlertAction:@"遊戲開始"];
 }
 
 @end

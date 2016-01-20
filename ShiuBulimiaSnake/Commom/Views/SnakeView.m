@@ -21,33 +21,32 @@
 }
 
 - (void)drawRect:(CGRect)rect {
+    // 畫蛇
     CGContextRef context = UIGraphicsGetCurrentContext();
     for (int i = 1; i < [SnakeModel snakeBodyArrays].count; i++) {
-        CGPoint point = [SnakeModel getXY:i];
+        CGPoint point = [SnakeModel getPoint:[SnakeModel snakeBodyArrays] index:i];
         CGContextAddEllipseInRect(context, (CGRectMake(point.x, point.y, 15.0, 15.0)));
     }
     CGContextDrawPath(context, kCGPathFill);
     CGContextStrokePath(context);
-
-    CGContextRef context2 = UIGraphicsGetCurrentContext();
-    NSString *hitPoint = [SnakeModel hitBodyArrays][0];
-    NSArray *XY = [hitPoint componentsSeparatedByString:@","];
-    int x = [XY[0] intValue];
-    int y = [XY[1] intValue];
-    CGContextSetRGBFillColor(context, 1, 0, 0, 1.0);
-    CGContextAddEllipseInRect(context2, (CGRectMake(x, y, 20.0, 20.0)));
-    CGContextDrawPath(context2, kCGPathFill);
-    CGContextStrokePath(context2);
+    
+    // 畫食物
+    CGContextRef foodContext = UIGraphicsGetCurrentContext();
+    CGPoint point = [SnakeModel getPoint:[SnakeModel hitBodyArrays] index:0];
+    CGContextSetRGBFillColor(foodContext, 1, 0, 0, 1.0);
+    CGContextAddEllipseInRect(foodContext, (CGRectMake((int)point.x, (int)point.y, 20.0, 20.0)));
+    CGContextDrawPath(foodContext, kCGPathFill);
+    CGContextStrokePath(foodContext);
 }
 
 - (void)initSnakeAndHitArrays {
     [[SnakeModel snakeBodyArrays] removeAllObjects];
     [[SnakeModel hitBodyArrays] removeAllObjects];
-    for (int i = 160; i > 60; i -= 20) {
+    for (int i = 160; i > 60; i -= pointDistance) {
         NSString *string = [NSString stringWithFormat:@"%d,100", i];
         [[SnakeModel snakeBodyArrays] addObject:string];
     }
-    [[SnakeModel hitBodyArrays] addObject:@"100,100"];
+    [[SnakeModel hitBodyArrays] addObject:@"200,100"];
 }
 
 @end
