@@ -11,7 +11,9 @@
 #import "SnakeModel.h"
 @interface MainViewController ()
 
-@property (weak, nonatomic) IBOutlet SnakeView *sankeView;
+@property (weak, nonatomic) IBOutlet UIView *mainView;
+@property (strong, nonatomic) SnakeView *snakeView;
+
 @property (nonatomic, weak) NSTimer *timer;
 @end
 
@@ -37,27 +39,34 @@
 
 #pragma mark - private method
 
+- (void)initSnakeView {
+    self.snakeView = [[SnakeView alloc] init];
+    self.snakeView.frame = self.mainView.frame;
+    [self.mainView addSubview:self.snakeView];
+}
+
 - (void)initAlertAction {
     UIAlertController *alert = [UIAlertController
                                 alertControllerWithTitle:@"遊戲"
-                                message:@"開始"
-                                preferredStyle:UIAlertControllerStyleAlert];
-    
+                                                 message:@"開始"
+                                          preferredStyle:UIAlertControllerStyleAlert];
+
     UIAlertAction *yesButton = [UIAlertAction
                                 actionWithTitle:@"Yes, please"
-                                style:UIAlertActionStyleDefault
-                                handler: ^(UIAlertAction *action)
+                                          style:UIAlertActionStyleDefault
+                                        handler: ^(UIAlertAction *action)
                                 {
                                     [self resetGame];
-                                    
+
                                 }];
     [alert addAction:yesButton];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)resetGame {
-    [SnakeModel resetGame:self.sankeView.frame.size];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+    [self initSnakeView];
+     [SnakeModel resetGame:self.mainView.frame.size];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
                                                 selector:@selector(requireSnakeMove)
                                                 userInfo:nil
@@ -66,13 +75,15 @@
 }
 - (void)requireSnakeMove {
     [SnakeModel requireSnakeMove];
-    [self.sankeView setNeedsDisplay];
+    [self.snakeView setNeedsDisplay];
     if ([SnakeModel isSnakeHitPoint]) {
         [SnakeModel requireIncreasingSnakelength];
         [SnakeModel creatNewHitPoint];
     }
-    
-    // + (bool)isSnakeHitPoint:(NSString *)fruitsCoordinate
+
+    if ([SnakeModel isSnakeHitOwnbody]) {
+        [self initAlertAction];
+    }
 }
 #pragma  mark - life cycle
 

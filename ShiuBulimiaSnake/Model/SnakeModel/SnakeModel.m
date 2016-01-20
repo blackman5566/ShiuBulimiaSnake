@@ -33,9 +33,6 @@
     static NSMutableArray *shared = nil;
     if (!shared) {
         shared = [[NSMutableArray alloc] init];
-        [shared addObject:@"160,100"];
-        [shared addObject:@"140,100"];
-        [shared addObject:@"120,100"];
     }
     return shared;
 }
@@ -44,11 +41,9 @@
     static NSMutableArray *shared = nil;
     if (!shared) {
         shared = [[NSMutableArray alloc] init];
-        [shared addObject:@"100,100"];
     }
     return shared;
 }
-
 
 + (void)resetGame:(CGSize)mainScreenSize {
     [[SnakeModel shared] resetGame:mainScreenSize];

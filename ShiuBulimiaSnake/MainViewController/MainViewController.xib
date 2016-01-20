@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
-                <outlet property="sankeView" destination="XbW-gn-hfH" id="Wc9-Wr-tOP"/>
+                <outlet property="mainView" destination="xAG-AM-S9u" id="iID-ZO-Dss"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,42 +16,42 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XbW-gn-hfH" customClass="SnakeView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="303"/>
-                    <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnF-6l-Iss">
-                    <rect key="frame" x="141" y="488" width="38" height="30"/>
+                    <rect key="frame" x="141" y="530" width="38" height="30"/>
                     <state key="normal" title="down"/>
                     <connections>
                         <action selector="downButtonAction:" destination="-1" eventType="touchUpInside" id="Fwu-U6-7KJ"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emP-ch-CF6">
-                    <rect key="frame" x="141" y="372" width="30" height="30"/>
+                    <rect key="frame" x="141" y="413" width="30" height="30"/>
                     <state key="normal" title="up"/>
                     <connections>
                         <action selector="upButtonAction:" destination="-1" eventType="touchUpInside" id="CKT-6f-hth"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Xm-0h-cNz">
-                    <rect key="frame" x="69" y="424" width="30" height="30"/>
-                    <state key="normal" title="left"/>
-                    <connections>
-                        <action selector="leftButtonAction:" destination="-1" eventType="touchUpInside" id="eiy-eF-nfh"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mQ-Th-V3X">
-                    <rect key="frame" x="219" y="424" width="32" height="30"/>
+                    <rect key="frame" x="219" y="470" width="32" height="30"/>
                     <state key="normal" title="right"/>
                     <connections>
                         <action selector="rightButtonAction:" destination="-1" eventType="touchUpInside" id="d3M-iq-6Gm"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xAG-AM-S9u">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="393"/>
+                    <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Xm-0h-cNz">
+                    <rect key="frame" x="71" y="470" width="30" height="30"/>
+                    <state key="normal" title="left"/>
+                    <connections>
+                        <action selector="leftButtonAction:" destination="-1" eventType="touchUpInside" id="eiy-eF-nfh"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="-52" y="310"/>
+            <point key="canvasLocation" x="-608" y="311"/>
         </view>
     </objects>
 </document>
