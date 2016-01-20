@@ -65,7 +65,7 @@
 
 - (void)resetGame {
     [self initSnakeView];
-     [SnakeModel resetGame:self.mainView.frame.size];
+    [SnakeModel resetGame:self.mainView.frame.size];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
                                                 selector:@selector(requireSnakeMove)
@@ -82,6 +82,8 @@
     }
 
     if ([SnakeModel isSnakeHitOwnbody]) {
+        [self.mainView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [self.timer invalidate];
         [self initAlertAction];
     }
 }

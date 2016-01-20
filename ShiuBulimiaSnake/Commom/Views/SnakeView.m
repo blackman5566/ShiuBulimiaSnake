@@ -34,13 +34,15 @@
     NSArray *XY = [hitPoint componentsSeparatedByString:@","];
     int x = [XY[0] intValue];
     int y = [XY[1] intValue];
-    CGContextSetRGBFillColor (context,  1, 0, 0, 1.0);
+    CGContextSetRGBFillColor(context, 1, 0, 0, 1.0);
     CGContextAddEllipseInRect(context2, (CGRectMake(x, y, 15.0, 15.0)));
     CGContextDrawPath(context2, kCGPathFill);
     CGContextStrokePath(context2);
 }
 
 - (void)initSnakeAndHitArrays {
+    [[SnakeModel snakeBodyArrays] removeAllObjects];
+    [[SnakeModel hitBodyArrays] removeAllObjects];
     for (int i = 160; i > 60; i -= 20) {
         NSString *string = [NSString stringWithFormat:@"%d,100", i];
         [[SnakeModel snakeBodyArrays] addObject:string];
