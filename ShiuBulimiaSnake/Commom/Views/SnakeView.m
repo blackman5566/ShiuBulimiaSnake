@@ -35,7 +35,7 @@
     int x = [XY[0] intValue];
     int y = [XY[1] intValue];
     CGContextSetRGBFillColor(context, 1, 0, 0, 1.0);
-    CGContextAddEllipseInRect(context2, (CGRectMake(x, y, 15.0, 15.0)));
+    CGContextAddEllipseInRect(context2, (CGRectMake(x, y, 20.0, 20.0)));
     CGContextDrawPath(context2, kCGPathFill);
     CGContextStrokePath(context2);
 }

@@ -91,8 +91,34 @@
 
 - (bool)isSnakeHitPoint {
     NSString *snakeHead = [SnakeModel snakeBodyArrays][0];
-    if ([snakeHead isEqualToString:[SnakeModel hitBodyArrays][0]]) {
-        return YES;
+    NSArray *headXY = [snakeHead componentsSeparatedByString:@","];
+    int x = [headXY[0] intValue];
+    int y = [headXY[1] intValue];
+    NSMutableArray *snakeRangeArrays = [NSMutableArray new];
+    for (int i = 1; i < 15; i++) {
+        for (int j = 1; j < 15; j++) {
+            NSString *string = [NSString stringWithFormat:@"%d,%d", x + i, y + j];
+            [snakeRangeArrays addObject:string];
+        }
+    }
+
+    NSMutableArray *hitRangeArrays = [NSMutableArray new];
+    NSString *hitPoint = [SnakeModel hitBodyArrays][0];
+    NSArray *hitXY = [hitPoint componentsSeparatedByString:@","];
+    int hitX = [hitXY[0] intValue];
+    int hitY = [hitXY[1] intValue];
+    for (int i = 1; i < 20; i++) {
+        for (int j = 1; j < 20; j++) {
+            NSString *string = [NSString stringWithFormat:@"%d,%d", hitX + i, hitY + j];
+            [hitRangeArrays addObject:string];
+        }
+    }
+    for (int j = 1; j < hitRangeArrays.count; j++) {
+        for (int i = 1; i < snakeRangeArrays.count; i++) {
+            if ([hitRangeArrays[j] isEqualToString:snakeRangeArrays[i]]) {
+                return YES;
+            }
+        }
     }
     return NO;
 }
@@ -197,8 +223,8 @@
 
 - (void)creatNewHitPoint {
     [[SnakeModel hitBodyArrays] removeAllObjects];
-    int x = 30 + (arc4random() % (self.mainScreenWidth - 30));
-    int y = 30 + (arc4random() % (self.mainScreenHeight - 30));
+    int x = 30 + (arc4random() % (self.mainScreenWidth - 50));
+    int y = 30 + (arc4random() % (self.mainScreenHeight - 50));
     [[SnakeModel hitBodyArrays] addObject:[NSString stringWithFormat:@"%d,%d", x, y]];
 
 }

@@ -66,7 +66,7 @@
 - (void)resetGame {
     [self initSnakeView];
     [SnakeModel resetGame:self.mainView.frame.size];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                   target:self
                                                 selector:@selector(requireSnakeMove)
                                                 userInfo:nil
