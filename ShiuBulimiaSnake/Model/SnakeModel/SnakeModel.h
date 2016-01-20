@@ -20,13 +20,19 @@ typedef enum {
 @property (nonatomic, assign) SnakeDirectionStatus snakeDirectionStatus;
 @property (nonatomic, assign) NSInteger mainScreenHeight;
 @property (nonatomic, assign) NSInteger mainScreenWidth;
+
 + (SnakeModel *)shared;
 + (NSMutableArray *)snakeBodyArrays;
++ (NSMutableArray *)hitBodyArrays;
 + (void)requireIncreasingSnakelength;
 + (void)resetGame:(CGSize)mainScreenSize;
 + (void)requireSnakeMove;
++ (CGPoint)getXY:(NSInteger)index;
 + (bool)isSnakeHitOwnbody;
-+ (bool)isSnakeHitPoint:(NSString *)fruitsCoordinate;
++ (bool)isSnakeHitPoint;
++ (void)isSnakeDirectionStatus:(SnakeDirectionStatus)SnakeDirectionStatus;
++ (void)creatNewHitPoint;
+
 /*
    - 蛇的 Model
    - property 包括：

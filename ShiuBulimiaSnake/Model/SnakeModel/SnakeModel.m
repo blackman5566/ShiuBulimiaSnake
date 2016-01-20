@@ -6,11 +6,15 @@
 //  Copyright © 2016年 許佳豪. All rights reserved.
 //
 
+
 #import "SnakeModel.h"
+
+#define pointDistance 20
 
 @interface SnakeModel ()
 
 @property (nonatomic, assign) BOOL isEatingFruit;
+
 @end
 
 @implementation SnakeModel
@@ -32,10 +36,19 @@
         [shared addObject:@"160,100"];
         [shared addObject:@"140,100"];
         [shared addObject:@"120,100"];
+    }
+    return shared;
+}
+
++ (NSMutableArray *)hitBodyArrays {
+    static NSMutableArray *shared = nil;
+    if (!shared) {
+        shared = [[NSMutableArray alloc] init];
         [shared addObject:@"100,100"];
     }
     return shared;
 }
+
 
 + (void)resetGame:(CGSize)mainScreenSize {
     [[SnakeModel shared] resetGame:mainScreenSize];
@@ -53,8 +66,20 @@
     return [[SnakeModel shared] isSnakeHitOwnbody];
 }
 
-+ (bool)isSnakeHitPoint:(NSString *)fruitsCoordinate {
-    return [[SnakeModel shared] isSnakeHitPoint:fruitsCoordinate];
++ (bool)isSnakeHitPoint {
+    return [[SnakeModel shared] isSnakeHitPoint];
+}
+
++ (void)isSnakeDirectionStatus:(SnakeDirectionStatus)SnakeDirectionStatus {
+    [[SnakeModel shared] snakeDirectionStatus:SnakeDirectionStatus];
+}
+
++ (CGPoint)getXY:(NSInteger)index {
+    return [[SnakeModel shared] getXY:index];
+}
+
++ (void)creatNewHitPoint {
+    [[SnakeModel shared] creatNewHitPoint];
 }
 
 #pragma mark - private method
@@ -69,9 +94,9 @@
     return NO;
 }
 
-- (bool)isSnakeHitPoint:(NSString *)fruitsCoordinate {
+- (bool)isSnakeHitPoint {
     NSString *snakeHead = [SnakeModel snakeBodyArrays][0];
-    if ([snakeHead isEqualToString:fruitsCoordinate]) {
+    if ([snakeHead isEqualToString:[SnakeModel hitBodyArrays][0]]) {
         return YES;
     }
     return NO;
@@ -83,66 +108,55 @@
 }
 
 - (void)SnakeMoveDown {
-    NSString *snakeHead = [SnakeModel snakeBodyArrays][0];
-    NSArray *headXY = [snakeHead componentsSeparatedByString:@","];
-    int x = [headXY[0] intValue];
-    int y = [headXY[1] intValue];
-    y += 20;
-    if (y > self.mainScreenHeight) {
-        y -= self.mainScreenHeight;
+    CGPoint point = [self getXY:0];
+    point.y += pointDistance;
+    if (point.y > self.mainScreenHeight) {
+        point.y = 0;
     }
-    NSString *newXY = [NSString stringWithFormat:@"%d,%d", x, y];
+    NSString *newXY = [NSString stringWithFormat:@"%d,%d", (int)point.x, (int)point.y];
     [[SnakeModel snakeBodyArrays] insertObject:newXY atIndex:0];
     [self removeLastXY];
 }
 
 - (void)SnakeMoveUp {
-    NSString *snakeHead = [SnakeModel snakeBodyArrays][0];
-    NSArray *headXY = [snakeHead componentsSeparatedByString:@","];
-    int x = [headXY[0] intValue];
-    int y = [headXY[1] intValue];
-    y -= 20;
-    if (y < 0) {
-        y += self.mainScreenHeight;
+    CGPoint point = [self getXY:0];
+    point.y -= pointDistance;
+    if (point.y < 0) {
+        point.y = self.mainScreenHeight;
     }
-    NSString *newXY = [NSString stringWithFormat:@"%d,%d", x, y];
+    NSString *newXY = [NSString stringWithFormat:@"%d,%d", (int)point.x, (int)point.y];
     [[SnakeModel snakeBodyArrays] insertObject:newXY atIndex:0];
     [self removeLastXY];
 }
 
 - (void)SnakeMoveLeft {
-    NSString *snakeHead = [SnakeModel snakeBodyArrays][0];
-    NSArray *headXY = [snakeHead componentsSeparatedByString:@","];
-    int x = [headXY[0] intValue];
-    int y = [headXY[1] intValue];
-    x -= 20;
-    if (x < 0) {
-        x += self.mainScreenWidth;
+    CGPoint point =  [self getXY:0];
+    point.x -= pointDistance;
+    if (point.x < 0) {
+        point.x = self.mainScreenWidth;
     }
-    NSString *newXY = [NSString stringWithFormat:@"%d,%d", x, y];
+    NSString *newXY = [NSString stringWithFormat:@"%d,%d", (int)point.x, (int)point.y];
     [[SnakeModel snakeBodyArrays] insertObject:newXY atIndex:0];
     [self removeLastXY];
 }
 
 - (void)SnakeMoveRight {
-    NSString *snakeHead = [SnakeModel snakeBodyArrays][0];
-    NSArray *headXY = [snakeHead componentsSeparatedByString:@","];
-    int x = [headXY[0] intValue];
-    int y = [headXY[1] intValue];
-    x += 20;
-    if (x > self.mainScreenHeight) {
-        x -= self.mainScreenHeight;
+    CGPoint point =  [self getXY:0];
+    point.x += pointDistance;
+    if (point.x > self.mainScreenWidth) {
+        point.x = 0;
     }
-    NSString *newXY = [NSString stringWithFormat:@"%d,%d", x, y];
+    NSString *newXY = [NSString stringWithFormat:@"%d,%d", (int)point.x, (int)point.y];
     [[SnakeModel snakeBodyArrays] insertObject:newXY atIndex:0];
-    NSLog(@"SnakeMoveRight");
     [self removeLastXY];
 }
+
 - (void)removeLastXY {
     if (self.isEatingFruit) {
         [[SnakeModel snakeBodyArrays] removeLastObject];
     }
 }
+
 - (void)addSnakeBody {
     switch (self.snakeDirectionStatus) {
         case SnakeDirectionStatusUp:
@@ -162,6 +176,10 @@
     }
 }
 
+- (void)snakeDirectionStatus:(SnakeDirectionStatus)SnakeDirectionStatus {
+    self.snakeDirectionStatus = SnakeDirectionStatus;
+}
+
 - (void)requireIncreasingSnakelength {
     self.isEatingFruit = NO;
     [self addSnakeBody];
@@ -171,6 +189,23 @@
     self.snakeDirectionStatus = SnakeDirectionStatusRight;
     self.mainScreenHeight = mainScreenSize.height;
     self.mainScreenWidth = mainScreenSize.width;
+}
+
+- (CGPoint)getXY:(NSInteger)index {
+    NSString *snakeHead = [SnakeModel snakeBodyArrays][index];
+    NSArray *headXY = [snakeHead componentsSeparatedByString:@","];
+    int x = [headXY[0] intValue];
+    int y = [headXY[1] intValue];
+    CGPoint point = CGPointMake(x, y);
+    return point;
+}
+
+- (void)creatNewHitPoint {
+    [[SnakeModel hitBodyArrays] removeAllObjects];
+    int x = 30 + (arc4random() % (self.mainScreenWidth - 30));
+    int y = 30 + (arc4random() % (self.mainScreenHeight - 30));
+    [[SnakeModel hitBodyArrays] addObject:[NSString stringWithFormat:@"%d,%d", x, y]];
+
 }
 
 @end

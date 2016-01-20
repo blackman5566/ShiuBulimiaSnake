@@ -12,24 +12,23 @@
 @implementation SnakeView
 
 - (void)drawRect:(CGRect)rect {
-    UIBezierPath *path = [[UIBezierPath alloc] init];
-    path.lineWidth = 40.0;
-    CGPoint point =  [self getXY:0];
-    [path moveToPoint:CGPointMake(point.x, point.y)];
+    CGContextRef context = UIGraphicsGetCurrentContext();
     for (int i = 1; i < [SnakeModel snakeBodyArrays].count; i++) {
-        CGPoint point =  [self getXY:i];
-        [path addLineToPoint:CGPointMake(point.x, point.y)];
+        CGPoint point = [SnakeModel getXY:i];
+        CGContextAddEllipseInRect(context, (CGRectMake(point.x, point.y, 10.0, 10.0)));
     }
-    [[UIColor redColor] setStroke];  //設定線條顏色
-    [path stroke];
+    CGContextDrawPath(context, kCGPathFill);
+    CGContextStrokePath(context);
+    
+    CGContextRef context2 = UIGraphicsGetCurrentContext();
+    NSString *hitPoint = [SnakeModel hitBodyArrays][0];
+    NSArray *XY = [hitPoint componentsSeparatedByString:@","];
+    int x = [XY[0] intValue];
+    int y = [XY[1] intValue];
+    CGContextSetStrokeColorWithColor(context2, [UIColor orangeColor].CGColor);
+    CGContextAddEllipseInRect(context2, (CGRectMake(x, y, 20.0, 20.0)));
+    CGContextDrawPath(context2, kCGPathFill);
+    CGContextStrokePath(context2);
 }
 
-- (CGPoint)getXY:(NSInteger)index {
-    NSString *snakeHead = [SnakeModel snakeBodyArrays][index];
-    NSArray *headXY = [snakeHead componentsSeparatedByString:@","];
-    int x = [headXY[0] intValue];
-    int y = [headXY[1] intValue];
-    CGPoint xyPoint = CGPointMake(x, y);
-    return xyPoint;
-}
 @end

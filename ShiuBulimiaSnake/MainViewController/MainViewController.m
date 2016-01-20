@@ -17,21 +17,39 @@
 
 @implementation MainViewController
 
+#pragma mark - Button Action
+
+- (IBAction)downButtonAction:(id)sender {
+    [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusDown];
+}
+
+- (IBAction)rightButtonAction:(id)sender {
+    [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusRight];
+}
+
+- (IBAction)leftButtonAction:(id)sender {
+    [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusLeft];
+}
+
+- (IBAction)upButtonAction:(id)sender {
+    [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusUp];
+}
+
 #pragma mark - private method
 
 - (void)initAlertAction {
-    UIAlertController *alert =   [UIAlertController
-                                  alertControllerWithTitle:@"遊戲"
-                                                   message:@"開始"
-                                            preferredStyle:UIAlertControllerStyleAlert];
-
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:@"遊戲"
+                                message:@"開始"
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
     UIAlertAction *yesButton = [UIAlertAction
                                 actionWithTitle:@"Yes, please"
-                                          style:UIAlertActionStyleDefault
-                                        handler: ^(UIAlertAction *action)
+                                style:UIAlertActionStyleDefault
+                                handler: ^(UIAlertAction *action)
                                 {
                                     [self resetGame];
-
+                                    
                                 }];
     [alert addAction:yesButton];
     [self presentViewController:alert animated:YES completion:nil];
@@ -39,7 +57,7 @@
 
 - (void)resetGame {
     [SnakeModel resetGame:self.sankeView.frame.size];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                   target:self
                                                 selector:@selector(requireSnakeMove)
                                                 userInfo:nil
@@ -49,16 +67,21 @@
 - (void)requireSnakeMove {
     [SnakeModel requireSnakeMove];
     [self.sankeView setNeedsDisplay];
+    if ([SnakeModel isSnakeHitPoint]) {
+        [SnakeModel requireIncreasingSnakelength];
+        [SnakeModel creatNewHitPoint];
+    }
+    
+    // + (bool)isSnakeHitPoint:(NSString *)fruitsCoordinate
 }
 #pragma  mark - life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
+
 - (void)viewDidAppear:(BOOL)animated {
     [self initAlertAction];
-}
-- (IBAction)test:(id)sender {
 }
 
 @end
