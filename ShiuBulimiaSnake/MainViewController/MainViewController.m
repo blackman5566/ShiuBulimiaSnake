@@ -9,10 +9,12 @@
 #import "MainViewController.h"
 #import "SnakeView.h"
 #import "SnakeModel.h"
+
 @interface MainViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *mainView;
-@property (strong, nonatomic) SnakeView *snakeView;
+
+@property (nonatomic, strong) SnakeView *snakeView;
 
 @property (nonatomic, weak) NSTimer *timer;
 @end
@@ -46,6 +48,7 @@
 }
 
 - (void)initAlertAction:(NSString *)message {
+    __weak typeof(self) weakSelf = self;
     UIAlertController *alert = [UIAlertController
                                 alertControllerWithTitle:@"遊戲"
                                                  message:message
@@ -56,7 +59,7 @@
                                           style:UIAlertActionStyleDefault
                                         handler: ^(UIAlertAction *action)
                                 {
-                                    [self resetGame];
+                                    [weakSelf resetGame];
 
                                 }];
     [alert addAction:yesButton];
@@ -81,7 +84,7 @@
         [SnakeModel creatNewHitPoint];
     }
 
-    if ([SnakeModel isSnakeHitOwnbody]) {
+    if ([SnakeModel isSnakeHitBody]) {
         [self.mainView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [self.timer invalidate];
         [self initAlertAction:@"重新開始"];

@@ -21,25 +21,28 @@
 
 + (SnakeModel *)shared {
     static SnakeModel *shared = nil;
-    if (!shared) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         shared = [[self alloc] init];
-    }
+    });
     return shared;
 }
 
 + (NSMutableArray *)snakeBodyArrays {
     static NSMutableArray *shared = nil;
-    if (!shared) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         shared = [[NSMutableArray alloc] init];
-    }
+    });
     return shared;
 }
 
 + (NSMutableArray *)hitBodyArrays {
     static NSMutableArray *shared = nil;
-    if (!shared) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         shared = [[NSMutableArray alloc] init];
-    }
+    });
     return shared;
 }
 
@@ -55,8 +58,8 @@
     [[SnakeModel shared] requireSnakeMove];
 }
 
-+ (bool)isSnakeHitOwnbody {
-    return [[SnakeModel shared] isSnakeHitOwnbody];
++ (bool)isSnakeHitBody {
+    return [[SnakeModel shared] isSnakeHitBody];
 }
 
 + (bool)isSnakeHitPoint {
@@ -77,7 +80,7 @@
 
 #pragma mark - private method
 
-- (bool)isSnakeHitOwnbody {
+- (bool)isSnakeHitBody {
     NSString *snakeHead = [SnakeModel snakeBodyArrays][0];
     for (int i = 1; i < [SnakeModel snakeBodyArrays].count; i++) {
         if ([snakeHead isEqualToString:[SnakeModel snakeBodyArrays][i]]) {

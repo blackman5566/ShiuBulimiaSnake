@@ -51,7 +51,7 @@ typedef enum {
 /*
    @abstract 詢問貪食蛇現在頭是否碰到自己的身體
  */
-+ (bool)isSnakeHitOwnbody;
++ (bool)isSnakeHitBody;
 
 /*
    @abstract 詢問貪食蛇的頭是否剛好碰到某個點
