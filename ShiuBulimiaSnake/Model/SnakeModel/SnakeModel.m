@@ -78,6 +78,10 @@
     [[SnakeModel shared] creatNewHitPoint];
 }
 
++ (bool)isSnakeCurrentDirection {
+    return [[SnakeModel shared] isSnakeCurrentDirection];
+}
+
 #pragma mark - private method
 
 - (bool)isSnakeHitBody {
@@ -222,6 +226,22 @@
     int y = 30 + (arc4random() % (self.mainScreenHeight - 50));
     [[SnakeModel hitBodyArrays] addObject:[NSString stringWithFormat:@"%d,%d", x, y]];
 
+}
+
+- (bool)isSnakeCurrentDirection {
+    bool isDirection;
+    switch (self.snakeDirectionStatus) {
+        case SnakeDirectionStatusUp:
+        case SnakeDirectionStatusDown:
+            isDirection = NO;
+            break;
+        case SnakeDirectionStatusLeft:
+        case SnakeDirectionStatusRight:
+            isDirection = YES;
+        default:
+            break;
+    }
+    return isDirection;
 }
 
 @end

@@ -73,4 +73,8 @@ typedef enum {
  */
 + (CGPoint)getPoint:(NSArray *)array index:(NSInteger)index;
 
+/*
+   @abstract 回傳貪食蛇目前移動方向 YES = 左或右  NO = 上或下
+ */
++ (bool)isSnakeCurrentDirection;
 @end

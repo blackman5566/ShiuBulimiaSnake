@@ -16,42 +16,41 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnF-6l-Iss">
-                    <rect key="frame" x="141" y="530" width="38" height="30"/>
-                    <state key="normal" title="down"/>
-                    <connections>
-                        <action selector="downButtonAction:" destination="-1" eventType="touchUpInside" id="Fwu-U6-7KJ"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emP-ch-CF6">
-                    <rect key="frame" x="141" y="413" width="30" height="30"/>
-                    <state key="normal" title="up"/>
-                    <connections>
-                        <action selector="upButtonAction:" destination="-1" eventType="touchUpInside" id="CKT-6f-hth"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mQ-Th-V3X">
-                    <rect key="frame" x="219" y="470" width="32" height="30"/>
-                    <state key="normal" title="right"/>
-                    <connections>
-                        <action selector="rightButtonAction:" destination="-1" eventType="touchUpInside" id="d3M-iq-6Gm"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xAG-AM-S9u">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="393"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Xm-0h-cNz">
-                    <rect key="frame" x="71" y="470" width="30" height="30"/>
-                    <state key="normal" title="left"/>
-                    <connections>
-                        <action selector="leftButtonAction:" destination="-1" eventType="touchUpInside" id="eiy-eF-nfh"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="CBE-Rr-hnm" appends="YES" id="rVS-rS-uud"/>
+                <outletCollection property="gestureRecognizers" destination="C7J-oM-kco" appends="YES" id="J3i-E7-JZL"/>
+                <outletCollection property="gestureRecognizers" destination="RNS-v8-nzS" appends="YES" id="aow-vu-BWf"/>
+                <outletCollection property="gestureRecognizers" destination="Giv-xA-Ize" appends="YES" id="3yV-yC-7nX"/>
+            </connections>
             <point key="canvasLocation" x="-608" y="311"/>
         </view>
+        <swipeGestureRecognizer direction="right" id="CBE-Rr-hnm">
+            <connections>
+                <action selector="didSwipe:" destination="-1" id="TlZ-EN-2gj"/>
+            </connections>
+        </swipeGestureRecognizer>
+        <swipeGestureRecognizer direction="left" id="C7J-oM-kco">
+            <connections>
+                <action selector="didSwipe:" destination="-1" id="YAy-I5-fUU"/>
+            </connections>
+        </swipeGestureRecognizer>
+        <swipeGestureRecognizer direction="up" id="RNS-v8-nzS">
+            <connections>
+                <action selector="didSwipe:" destination="-1" id="djn-ns-LXo"/>
+            </connections>
+        </swipeGestureRecognizer>
+        <swipeGestureRecognizer direction="down" id="Giv-xA-Ize">
+            <connections>
+                <action selector="didSwipe:" destination="-1" id="REh-q1-f6L"/>
+            </connections>
+        </swipeGestureRecognizer>
     </objects>
 </document>

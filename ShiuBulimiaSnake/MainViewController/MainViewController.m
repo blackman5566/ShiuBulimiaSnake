@@ -21,22 +21,25 @@
 
 @implementation MainViewController
 
-#pragma mark - Button Action
+#pragma mark - UISwipeGestureRecognizer Action
 
-- (IBAction)downButtonAction:(id)sender {
-    [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusDown];
-}
-
-- (IBAction)rightButtonAction:(id)sender {
-    [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusRight];
-}
-
-- (IBAction)leftButtonAction:(id)sender {
-    [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusLeft];
-}
-
-- (IBAction)upButtonAction:(id)sender {
-    [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusUp];
+- (IBAction)didSwipe:(UISwipeGestureRecognizer *)sender {
+    if ([SnakeModel isSnakeCurrentDirection]) {
+        if (sender.direction ==UISwipeGestureRecognizerDirectionUp) {
+            [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusUp];
+            
+        }else if(sender.direction ==UISwipeGestureRecognizerDirectionDown){
+            [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusDown];
+        }
+    }else{
+        if (sender.direction ==UISwipeGestureRecognizerDirectionLeft) {
+            [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusLeft];
+            
+        }else if(sender.direction ==UISwipeGestureRecognizerDirectionRight){
+            [SnakeModel isSnakeDirectionStatus:SnakeDirectionStatusRight];
+        }
+        
+    }
 }
 
 #pragma mark - private method
@@ -51,16 +54,16 @@
     __weak typeof(self) weakSelf = self;
     UIAlertController *alert = [UIAlertController
                                 alertControllerWithTitle:@"遊戲"
-                                                 message:message
-                                          preferredStyle:UIAlertControllerStyleAlert];
-
+                                message:message
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
     UIAlertAction *yesButton = [UIAlertAction
                                 actionWithTitle:@"Yes, please"
-                                          style:UIAlertActionStyleDefault
-                                        handler: ^(UIAlertAction *action)
+                                style:UIAlertActionStyleDefault
+                                handler: ^(UIAlertAction *action)
                                 {
                                     [weakSelf resetGame];
-
+                                    
                                 }];
     [alert addAction:yesButton];
     [self presentViewController:alert animated:YES completion:nil];
@@ -69,7 +72,7 @@
 - (void)resetGame {
     [self initSnakeView];
     [SnakeModel resetGame:self.mainView.frame.size];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                   target:self
                                                 selector:@selector(requireSnakeMove)
                                                 userInfo:nil
@@ -83,17 +86,19 @@
         [SnakeModel requireIncreasingSnakelength];
         [SnakeModel creatNewHitPoint];
     }
-
+    
     if ([SnakeModel isSnakeHitBody]) {
         [self.mainView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [self.timer invalidate];
         [self initAlertAction:@"重新開始"];
     }
 }
+
 #pragma  mark - life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initSnakeView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
