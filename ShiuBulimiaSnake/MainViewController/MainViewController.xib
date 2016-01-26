@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
@@ -16,13 +15,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xAG-AM-S9u">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAG-AM-S9u">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="xAG-AM-S9u" secondAttribute="trailing" id="AcE-Gl-zzz"/>
+                <constraint firstItem="xAG-AM-S9u" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DPS-BQ-Gab"/>
+                <constraint firstItem="xAG-AM-S9u" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HRs-pD-Qm1"/>
+                <constraint firstAttribute="bottom" secondItem="xAG-AM-S9u" secondAttribute="bottom" id="LsJ-qU-nyp"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="CBE-Rr-hnm" appends="YES" id="rVS-rS-uud"/>
@@ -30,7 +35,7 @@
                 <outletCollection property="gestureRecognizers" destination="RNS-v8-nzS" appends="YES" id="aow-vu-BWf"/>
                 <outletCollection property="gestureRecognizers" destination="Giv-xA-Ize" appends="YES" id="3yV-yC-7nX"/>
             </connections>
-            <point key="canvasLocation" x="-608" y="311"/>
+            <point key="canvasLocation" x="-738" y="131"/>
         </view>
         <swipeGestureRecognizer direction="right" id="CBE-Rr-hnm">
             <connections>

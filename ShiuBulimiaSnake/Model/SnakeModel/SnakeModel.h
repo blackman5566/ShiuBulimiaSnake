@@ -69,9 +69,9 @@ typedef enum {
 + (void)creatNewHitPoint;
 
 /*
-   @abstract 回傳貪食蛇目前的身體座標點
+   @abstract 回傳的相對的座標點
  */
-+ (CGPoint)getPoint:(NSArray *)array index:(NSInteger)index;
++ (CGPoint)snakePoint:(NSArray *)array index:(NSInteger)index;
 
 /*
    @abstract 回傳貪食蛇目前移動方向 YES = 左或右  NO = 上或下

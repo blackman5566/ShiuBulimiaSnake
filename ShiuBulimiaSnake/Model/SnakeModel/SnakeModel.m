@@ -70,8 +70,8 @@
     [[SnakeModel shared] snakeDirectionStatus:SnakeDirectionStatus];
 }
 
-+ (CGPoint)getPoint:(NSArray *)array index:(NSInteger)index {
-    return [[SnakeModel shared] getPoint:array index:index];
++ (CGPoint)snakePoint:(NSArray *)array index:(NSInteger)index {
+    return [[SnakeModel shared] snakePoint:array index:index];
 }
 
 + (void)creatNewHitPoint {
@@ -95,7 +95,7 @@
 }
 
 - (bool)isSnakeHitPoint {
-    CGPoint snakeHeadPoint = [self getPoint:[SnakeModel snakeBodyArrays] index:0];
+    CGPoint snakeHeadPoint = [self snakePoint:[SnakeModel snakeBodyArrays] index:0];
     NSMutableArray *snakeRangeArrays = [NSMutableArray new];
     for (int i = 1; i < 10; i++) {
         for (int j = 1; j < 10; j++) {
@@ -104,7 +104,7 @@
         }
     }
 
-    CGPoint hitPoint = [self getPoint:[SnakeModel hitBodyArrays] index:0];
+    CGPoint hitPoint = [self snakePoint:[SnakeModel hitBodyArrays] index:0];
     NSMutableArray *hitRangeArrays = [NSMutableArray new];
     for (int i = 1; i < 15; i++) {
         for (int j = 1; j < 15; j++) {
@@ -128,7 +128,7 @@
 }
 
 - (void)SnakeMoveDown {
-    CGPoint point =  [self getPoint:[SnakeModel snakeBodyArrays] index:0];
+    CGPoint point =  [self snakePoint:[SnakeModel snakeBodyArrays] index:0];
     point.y += pointDistance;
     if (point.y > self.mainScreenHeight) {
         point.y = 0;
@@ -139,7 +139,7 @@
 }
 
 - (void)SnakeMoveUp {
-    CGPoint point =  [self getPoint:[SnakeModel snakeBodyArrays] index:0];
+    CGPoint point =  [self snakePoint:[SnakeModel snakeBodyArrays] index:0];
     point.y -= pointDistance;
     if (point.y < 0) {
         point.y = self.mainScreenHeight;
@@ -150,7 +150,7 @@
 }
 
 - (void)SnakeMoveLeft {
-    CGPoint point =  [self getPoint:[SnakeModel snakeBodyArrays] index:0];
+    CGPoint point =  [self snakePoint:[SnakeModel snakeBodyArrays] index:0];
     point.x -= pointDistance;
     if (point.x < 0) {
         point.x = self.mainScreenWidth;
@@ -161,7 +161,7 @@
 }
 
 - (void)SnakeMoveRight {
-    CGPoint point =  [self getPoint:[SnakeModel snakeBodyArrays] index:0];
+    CGPoint point =  [self snakePoint:[SnakeModel snakeBodyArrays] index:0];
     point.x += pointDistance;
     if (point.x > self.mainScreenWidth) {
         point.x = 0;
@@ -211,19 +211,19 @@
     self.mainScreenWidth = mainScreenSize.width;
 }
 
-- (CGPoint)getPoint:(NSArray *)array index:(NSInteger)index {
+- (CGPoint)snakePoint:(NSArray *)array index:(NSInteger)index {
     NSString *snakeHead = array[index];
     NSArray *headXY = [snakeHead componentsSeparatedByString:@","];
-    int x = [headXY[0] intValue];
-    int y = [headXY[1] intValue];
+    NSInteger x = [headXY[0] intValue];
+    NSInteger y = [headXY[1] intValue];
     CGPoint point = CGPointMake(x, y);
     return point;
 }
 
 - (void)creatNewHitPoint {
     [[SnakeModel hitBodyArrays] removeAllObjects];
-    int x = 30 + (arc4random() % (self.mainScreenWidth - 50));
-    int y = 30 + (arc4random() % (self.mainScreenHeight - 50));
+    NSInteger x = 30 + (arc4random() % (self.mainScreenWidth - 50));
+    NSInteger y = 30 + (arc4random() % (self.mainScreenHeight - 50));
     [[SnakeModel hitBodyArrays] addObject:[NSString stringWithFormat:@"%d,%d", x, y]];
 
 }
