@@ -1,2 +1,2 @@
-# ShiuBulimiaSnake
-![Alt Text](![](file:///Users/Allen_shiu/Desktop/sanke.gif))
+
+![Alt Text](https://dl.dropboxusercontent.com/u/81743100/sanke.gif)
